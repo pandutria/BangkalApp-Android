@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuProfile"
+        android:title="Profil"
+        android:icon="@drawable/img_2"/>
+
+    <item
+        android:id="@+id/menuGovernment"
+        android:title="Pemerintahan"
+        android:icon="@drawable/img_3"/>
+
+
+    <item
+        android:id="@+id/menuNews"
+        android:title="Pemberitahuan"
+        android:icon="@drawable/img_4"/>
+
+    <item
+        android:id="@+id/menuPotensi"
+        android:title="Potensi"
+        android:icon="@drawable/img_5"/>
+
+    <item
+        android:id="@+id/menuPelayanan"
+        android:title="Pelayanan"
+        android:icon="@drawable/img_6"/>
+
+</menu>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:src="@drawable/img_1"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:text="Selamat Datang"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/primary"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:text="BangkalApp adalah aplikasi layanan digital resmi Desa Bangkal yang memudahkan warga dalam mengakses informasi dan pelayanan desa secara online."
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/lightGray"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="15sp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/primary"
+        android:text="Masuk"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="14sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lightGray"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="15sp"
+            android:text="Ingin akses semua fitur?"/>
+
+        <TextView
+            android:id="@+id/tvAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Login di sini"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
