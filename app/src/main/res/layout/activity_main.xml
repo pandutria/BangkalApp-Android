@@ -21,7 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:menu="@menu/menu"
+        app:labelVisibilityMode="selected"
         app:itemActiveIndicatorStyle="@null"
+        app:itemIconSize="22dp"
+        android:elevation="-5dp"
         app:itemIconTint="@color/navbar_color_selector"
         app:itemTextColor="@color/navbar_color_selector"
         android:background="@color/white"/>

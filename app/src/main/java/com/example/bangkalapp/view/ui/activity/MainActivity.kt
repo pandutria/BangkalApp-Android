@@ -8,6 +8,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.bangkalapp.R
 import com.example.bangkalapp.databinding.ActivityMainBinding
+import com.example.bangkalapp.view.ui.fragment.GovermentFragment
+import com.example.bangkalapp.view.ui.fragment.NewsFragment
+import com.example.bangkalapp.view.ui.fragment.PotentialFragment
+import com.example.bangkalapp.view.ui.fragment.ProfileFragment
+import com.example.bangkalapp.view.ui.fragment.ServiceFragment
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -18,7 +23,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.apply {
-            showFragment()
+            showFragment(ProfileFragment())
+
+            bottomNav.setOnNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.menuProfile -> {
+                        showFragment(ProfileFragment())
+                        return@setOnNavigationItemSelectedListener true
+                    }
+
+                    R.id.menuGovernment -> {
+                        showFragment(GovermentFragment())
+                        return@setOnNavigationItemSelectedListener true
+                    }
+
+                    R.id.menuNews -> {
+                        showFragment(NewsFragment())
+                        return@setOnNavigationItemSelectedListener true
+                    }
+
+                    R.id.menuPotential -> {
+                        showFragment(PotentialFragment())
+                        return@setOnNavigationItemSelectedListener true
+                    }
+
+                    R.id.menuService -> {
+                        showFragment(ServiceFragment())
+                        return@setOnNavigationItemSelectedListener true
+                    }
+
+                    else -> false
+                }
+            }
         }
 
     }

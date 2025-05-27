@@ -8,22 +8,22 @@
 
     <item
         android:id="@+id/menuGovernment"
-        android:title="Pemerintahan"
+        android:title="Pemerintah"
         android:icon="@drawable/img_3"/>
 
 
     <item
         android:id="@+id/menuNews"
-        android:title="Pemberitahuan"
+        android:title="Berita"
         android:icon="@drawable/img_4"/>
 
     <item
-        android:id="@+id/menuPotensi"
+        android:id="@+id/menuPotential"
         android:title="Potensi"
         android:icon="@drawable/img_5"/>
 
     <item
-        android:id="@+id/menuPelayanan"
+        android:id="@+id/menuService"
         android:title="Pelayanan"
         android:icon="@drawable/img_6"/>
 

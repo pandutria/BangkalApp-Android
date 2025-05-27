@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".view.ui.fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="10dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/example"
+                        android:scaleType="centerCrop"/>
+
+                </androidx.cardview.widget.CardView>
+
+<!--                <TextView-->
+<!--                    android:layout_width=""-->
+<!--                    android:layout_height=""-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="Sejarah Desa"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rv"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    tools:listitem="@layout/item_history"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>
