@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="Desa Bangkal Gelar Festival Buah Tahunan ke-5"
             android:maxLines="2"
             android:ellipsize="end"
@@ -32,7 +32,7 @@
         <TextView
             android:id="@+id/tvText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:text="Desa Bangkal sukses menyelenggarakan Festival Buah Tahunan ke-5 yang dihadiri ratusan pengunjung dari berbagai daerah. Acara yang berlangsung selama dua hari ini menampilkan berbagai produk buah unggulan desa seperti durian, manggis, dan salak. Festival ini sekaligus menjadi ajang promosi potensi agrowisata Desa Bangkal yang semakin berkembang."
             android:maxLines="4"
             android:ellipsize="end"

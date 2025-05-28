@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Pengumuman Kegiatan Kerja Bakti Bersama Desa Bangkal"
         android:maxLines="2"
         android:ellipsize="end"
@@ -36,7 +36,7 @@
     <TextView
         android:id="@+id/tvText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="Diberitahukan kepada seluruh warga Desa Bangkal bahwa akan diadakan kerja bakti bersih-bersih desa pada Sabtu, 10 Juni 2023 pukul 07.00-11.00 WITA "
         android:maxLines="2"
         android:ellipsize="end"
