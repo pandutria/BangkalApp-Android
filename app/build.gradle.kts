@@ -41,6 +41,7 @@ android {
 
 dependencies {
 //    implementation (libs.shimmer)
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation (libs.glide)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

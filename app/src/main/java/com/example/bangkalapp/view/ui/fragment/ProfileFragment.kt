@@ -34,6 +34,11 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        showData()
+    }
+
     fun showData() {
         try {
             lifecycleScope.launch(Dispatchers.IO) {

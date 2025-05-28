@@ -5,56 +5,151 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.example.bangkalapp.R
+import com.example.bangkalapp.data.local.Helper
+import com.example.bangkalapp.data.model.Organization
+import com.example.bangkalapp.data.model.Village
+import com.example.bangkalapp.data.network.HttpHandler
+import com.example.bangkalapp.databinding.FragmentGovermentBinding
+import com.example.bangkalapp.view.adapter.OrganizationAdapter
+import com.example.bangkalapp.view.adapter.VillageAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
+import java.net.URL
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GovermentFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GovermentFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    lateinit var binding: FragmentGovermentBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var listener: OnGovermentLoaded? = null
+    var isOrganizationLoaded = false
+    var isVillageLoaded = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_goverment, container, false)
+        binding = FragmentGovermentBinding.inflate(layoutInflater, container, false)
+
+        // Tampilkan loading state
+        showLoadingState(true)
+
+        showData()
+        showDataVillage()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GovermentFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GovermentFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun showLoadingState(isLoading: Boolean) {
+        if (isLoading) {
+            // Sembunyikan content, tampilkan loading
+            binding.rv.visibility = View.GONE
+            binding.rv2.visibility = View.GONE
+            // Tambahkan loading indicator jika ada di layout
+            // binding.loadingIndicator.visibility = View.VISIBLE
+        } else {
+            // Tampilkan content, sembunyikan loading
+            binding.rv.visibility = View.VISIBLE
+            binding.rv2.visibility = View.VISIBLE
+            // binding.loadingIndicator.visibility = View.GONE
+        }
+    }
+
+    fun showData() {
+        try {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val response = HttpHandler().request("organization")
+                val list = mutableListOf<Organization>()
+
+                if (response.code in 200..300) {
+                    val jsonArray = JSONArray(response.body)
+
+                    for (i in 0 until jsonArray.length()) {
+                        val data = jsonArray.getJSONObject(i)
+                        list.add(
+                            Organization(
+                                id = data.getInt("id"),
+                                title = data.getString("title"),
+                                description = data.getString("description"),
+                                level = data.getInt("level"),
+                                image_url = data.getString("image_url")
+                            )
+                        )
+                    }
+                    withContext(Dispatchers.Main) {
+                        binding.rv.adapter = OrganizationAdapter(list)
+                        isOrganizationLoaded = true
+                        checkAllDataLoaded()
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        isOrganizationLoaded = true
+                        checkAllDataLoaded()
+                    }
                 }
             }
+        } catch (e: Exception) {
+            Helper.log(e.message!!)
+            isOrganizationLoaded = true
+            checkAllDataLoaded()
+        }
+    }
+
+    fun showDataVillage() {
+        try {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val response = HttpHandler().request("village")
+                val list = mutableListOf<Village>()
+
+                if (response.code in 200..300) {
+                    val jsonArray = JSONArray(response.body)
+
+                    for (i in 0 until jsonArray.length()) {
+                        val data = jsonArray.getJSONObject(i)
+                        val dataOrganization = data.getJSONObject("organization")
+                        list.add(
+                            Village(
+                                id = data.getInt("id"),
+                                name = data.getString("name"),
+                                contact = data.getString("contact"),
+                                image_url = data.getString("image_url"),
+                                organization = Organization(
+                                    title = dataOrganization.getString("title")
+                                )
+                            )
+                        )
+                    }
+
+                    withContext(Dispatchers.Main) {
+                        binding.rv2.adapter = VillageAdapter(list)
+                        isVillageLoaded = true
+                        checkAllDataLoaded()
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        isVillageLoaded = true
+                        checkAllDataLoaded()
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            Helper.log(e.message!!)
+            isVillageLoaded = true
+            checkAllDataLoaded()
+        }
+    }
+
+    fun checkAllDataLoaded() {
+        if (isOrganizationLoaded && isVillageLoaded) {
+            showLoadingState(false)
+            listener?.onLoaded()
+        }
+    }
+
+    interface OnGovermentLoaded {
+        fun onLoaded()
     }
 }

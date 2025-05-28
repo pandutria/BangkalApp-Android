@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.bangkalapp.R
 import com.example.bangkalapp.databinding.ActivityMainBinding
 import com.example.bangkalapp.view.ui.fragment.GovermentFragment
+import com.example.bangkalapp.view.ui.fragment.LoadingFragment
 import com.example.bangkalapp.view.ui.fragment.NewsFragment
 import com.example.bangkalapp.view.ui.fragment.PotentialFragment
 import com.example.bangkalapp.view.ui.fragment.ProfileFragment
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menuGovernment -> {
-                        showFragment(GovermentFragment())
+                        showGovermentFragmentWithLoading()
                         return@setOnNavigationItemSelectedListener true
                     }
 
@@ -57,6 +58,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    fun showGovermentFragmentWithLoading() {
+        showFragment(LoadingFragment())
+
+        val fragment = GovermentFragment()
+        fragment.listener = object : GovermentFragment.OnGovermentLoaded {
+            override fun onLoaded() {
+                showFragment(fragment)
+            }
+        }
     }
 
     fun showFragment(fragment: Fragment) {
