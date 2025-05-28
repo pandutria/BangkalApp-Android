@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menuGovernment -> {
-                        showGovermentFragmentWithLoading()
+                        showFragment(GovermentFragment())
                         return@setOnNavigationItemSelectedListener true
                     }
 
@@ -60,16 +60,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun showGovermentFragmentWithLoading() {
-        showFragment(LoadingFragment())
-
-        val fragment = GovermentFragment()
-        fragment.listener = object : GovermentFragment.OnGovermentLoaded {
-            override fun onLoaded() {
-                showFragment(fragment)
-            }
-        }
-    }
 
     fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

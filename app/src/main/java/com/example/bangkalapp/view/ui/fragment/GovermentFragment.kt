@@ -23,19 +23,11 @@ import java.net.URL
 
 class GovermentFragment : Fragment() {
     lateinit var binding: FragmentGovermentBinding
-
-    var listener: OnGovermentLoaded? = null
-    var isOrganizationLoaded = false
-    var isVillageLoaded = false
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGovermentBinding.inflate(layoutInflater, container, false)
-
-        // Tampilkan loading state
-        showLoadingState(true)
 
         showData()
         showDataVillage()
@@ -43,24 +35,14 @@ class GovermentFragment : Fragment() {
         return binding.root
     }
 
-    private fun showLoadingState(isLoading: Boolean) {
-        if (isLoading) {
-            // Sembunyikan content, tampilkan loading
-            binding.rv.visibility = View.GONE
-            binding.rv2.visibility = View.GONE
-            // Tambahkan loading indicator jika ada di layout
-            // binding.loadingIndicator.visibility = View.VISIBLE
-        } else {
-            // Tampilkan content, sembunyikan loading
-            binding.rv.visibility = View.VISIBLE
-            binding.rv2.visibility = View.VISIBLE
-            // binding.loadingIndicator.visibility = View.GONE
-        }
-    }
 
     fun showData() {
         try {
             lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    binding.pbRv.visibility = View.VISIBLE
+                }
+
                 val response = HttpHandler().request("organization")
                 val list = mutableListOf<Organization>()
 
@@ -81,26 +63,25 @@ class GovermentFragment : Fragment() {
                     }
                     withContext(Dispatchers.Main) {
                         binding.rv.adapter = OrganizationAdapter(list)
-                        isOrganizationLoaded = true
-                        checkAllDataLoaded()
                     }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        isOrganizationLoaded = true
-                        checkAllDataLoaded()
-                    }
+                }
+
+                withContext(Dispatchers.Main) {
+                    binding.pbRv.visibility = View.GONE
                 }
             }
         } catch (e: Exception) {
             Helper.log(e.message!!)
-            isOrganizationLoaded = true
-            checkAllDataLoaded()
         }
     }
 
     fun showDataVillage() {
         try {
             lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    binding.pbRv2.visibility = View.VISIBLE
+                }
+
                 val response = HttpHandler().request("village")
                 val list = mutableListOf<Village>()
 
@@ -125,31 +106,15 @@ class GovermentFragment : Fragment() {
 
                     withContext(Dispatchers.Main) {
                         binding.rv2.adapter = VillageAdapter(list)
-                        isVillageLoaded = true
-                        checkAllDataLoaded()
                     }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        isVillageLoaded = true
-                        checkAllDataLoaded()
-                    }
+                }
+
+                withContext(Dispatchers.Main) {
+                    binding.pbRv2.visibility = View.GONE
                 }
             }
         } catch (e: Exception) {
             Helper.log(e.message!!)
-            isVillageLoaded = true
-            checkAllDataLoaded()
         }
-    }
-
-    fun checkAllDataLoaded() {
-        if (isOrganizationLoaded && isVillageLoaded) {
-            showLoadingState(false)
-            listener?.onLoaded()
-        }
-    }
-
-    interface OnGovermentLoaded {
-        fun onLoaded()
     }
 }

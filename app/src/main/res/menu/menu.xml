@@ -11,10 +11,9 @@
         android:title="Pemerintah"
         android:icon="@drawable/img_3"/>
 
-
     <item
         android:id="@+id/menuNews"
-        android:title="Berita"
+        android:title="Informasi"
         android:icon="@drawable/img_4"/>
 
     <item

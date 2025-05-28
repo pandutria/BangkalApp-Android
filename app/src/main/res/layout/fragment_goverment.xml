@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,44 +25,75 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="18sp"
+                    android:text="Organisasi Desa"
                     android:textColor="@color/black"
-                    android:text="Organisasi Desa"/>
+                    android:textSize="18sp" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:overScrollMode="never"
-                    tools:listitem="@layout/item_organization"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:id="@+id/rv"/>
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/pbRv"
+                        android:layout_width="45dp"
+                        android:visibility="gone"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:indeterminateTint="@color/primary" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_organization" />
+
+                </RelativeLayout>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:textSize="18sp"
+                    android:text="Perangkat Desa"
                     android:textColor="@color/black"
-                    android:text="Perangkat Desa"/>
+                    android:textSize="18sp" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2"
-                    tools:listitem="@layout/item_village_officials"
-                    android:id="@+id/rv2"/>
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/pbRv2"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"
+                        android:indeterminateTint="@color/primary" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="2"
+                        tools:listitem="@layout/item_village_officials" />
+
+                </RelativeLayout>
+
+
 
             </LinearLayout>
 

@@ -42,6 +42,10 @@ class ProfileFragment : Fragment() {
     fun showData() {
         try {
             lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    binding.pbRv.visibility = View.VISIBLE
+                }
+
                 val response = HttpHandler().request("history")
                 val list = mutableListOf<History>()
 
@@ -64,6 +68,9 @@ class ProfileFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         binding.rv.adapter = HistoryAdapter(list)
                     }
+                }
+                withContext(Dispatchers.Main) {
+                    binding.pbRv.visibility = View.GONE
                 }
             }
         } catch (e: Exception) {
