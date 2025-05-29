@@ -68,7 +68,7 @@
             android:text="Ingin akses semua fitur?"/>
 
         <TextView
-            android:id="@+id/tvAdmin"
+            android:id="@+id/tvLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
