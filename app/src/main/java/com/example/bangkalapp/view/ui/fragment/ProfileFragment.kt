@@ -19,6 +19,8 @@ import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
 
+
+
 class ProfileFragment : Fragment() {
     lateinit var binding: FragmentProfileBinding
 
@@ -77,5 +79,4 @@ class ProfileFragment : Fragment() {
             Helper.log(e.message!!)
         }
     }
-
 }

@@ -24,7 +24,7 @@
         app:labelVisibilityMode="selected"
         app:itemActiveIndicatorStyle="@null"
         app:itemIconSize="22dp"
-        android:elevation="-5dp"
+        android:elevation="15dp"
         app:itemIconTint="@color/navbar_color_selector"
         app:itemTextColor="@color/navbar_color_selector"
         android:background="@color/white"/>

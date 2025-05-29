@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.frame, fragment)

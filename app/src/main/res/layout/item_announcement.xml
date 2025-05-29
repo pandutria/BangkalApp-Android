@@ -8,10 +8,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="230dp"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         app:cardCornerRadius="10dp">
 
         <ImageView
+            android:id="@+id/imgImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/example"
@@ -22,7 +23,7 @@
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:text="Pengumuman Kegiatan Kerja Bakti Bersama Desa Bangkal"
         android:maxLines="2"
         android:ellipsize="end"
@@ -36,7 +37,7 @@
     <TextView
         android:id="@+id/tvText"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:text="Diberitahukan kepada seluruh warga Desa Bangkal bahwa akan diadakan kerja bakti bersih-bersih desa pada Sabtu, 10 Juni 2023 pukul 07.00-11.00 WITA "
         android:maxLines="2"
         android:ellipsize="end"
