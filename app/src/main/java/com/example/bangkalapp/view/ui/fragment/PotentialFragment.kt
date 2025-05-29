@@ -5,56 +5,69 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.example.bangkalapp.R
+import com.example.bangkalapp.data.local.Helper
+import com.example.bangkalapp.data.model.Potential
+import com.example.bangkalapp.data.network.HttpHandler
+import com.example.bangkalapp.databinding.FragmentPotentialBinding
+import com.example.bangkalapp.databinding.FragmentProfileBinding
+import com.example.bangkalapp.view.adapter.PotentialAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PotentialFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PotentialFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var binding: FragmentPotentialBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_potential, container, false)
+        binding = FragmentPotentialBinding.inflate(layoutInflater, container, false)
+
+        showData()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PotentialFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PotentialFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun showData() {
+        try {
+            lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    binding.pbRv.visibility = View.VISIBLE
+                    binding.rv.visibility = View.GONE
+                }
+
+                val response = HttpHandler().request("potential")
+                val list = mutableListOf<Potential>()
+
+                if (response.code in 200..300) {
+                    val jsonArray = JSONArray(response.body)
+
+                    for (i in 0 until jsonArray.length()) {
+                        val data = jsonArray.getJSONObject(i)
+
+                        list.add(Potential(
+                            id = data.getInt("id"),
+                            title = data.getString("title"),
+                            description = data.getString("description"),
+                            image_url = data.getString("image_url")
+                        ))
+                    }
+                }
+
+                withContext(Dispatchers.Main) {
+                    binding.rv.adapter = PotentialAdapter(list)
+                    binding.pbRv.visibility = View.GONE
+                    binding.rv.visibility = View.VISIBLE
                 }
             }
+        } catch (e: Exception) {
+            Helper.log(e.message!!)
+        }
     }
+
 }

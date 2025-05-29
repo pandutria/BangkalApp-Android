@@ -97,6 +97,7 @@ class NewsFragment : Fragment() {
                             title = data.getString("title"),
                             text =  data.getString("text"),
                             image_url =  data.getString("image_url"),
+                            url = data.getString("url")
                         ))
                     }
                 }

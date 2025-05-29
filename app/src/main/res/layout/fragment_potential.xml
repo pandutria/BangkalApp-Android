@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".view.ui.fragment.PotentialFragment">
+    android:background="@color/white">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,12 +22,44 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/rv"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="Potensi Desa"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/pbRv"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"
+                        android:indeterminateTint="@color/primary" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/rv"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        tools:listitem="@layout/item_potential"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                </RelativeLayout>
+
+
 
             </LinearLayout>
+
 
         </RelativeLayout>
 

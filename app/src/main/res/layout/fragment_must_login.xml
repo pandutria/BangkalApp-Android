@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".view.ui.fragment.MustLoginFragment">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/img_11"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login Terlebih Dahulu!!"
+        android:textAlignment="center"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="18sp"
+        android:textColor="@color/primary"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fitur ini hanya tersedia untuk pengguna yang sudah login. Silakan masuk ke akun Anda untuk melanjutkan dan menikmati semua layanan yang tersedia di aplikasi ini."
+        android:textAlignment="center"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        android:paddingTop="8dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:textColor="@color/lightGray" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/primary"
+        android:text="Login"
+        android:fontFamily="@font/poppins_semibold"
+        android:textSize="14sp"/>
+
+
+
+</LinearLayout>
