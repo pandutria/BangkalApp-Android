@@ -7,9 +7,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.bangkalapp.R
+import com.example.bangkalapp.data.local.MySharedPrefrence
 import com.example.bangkalapp.databinding.ActivityMainBinding
 import com.example.bangkalapp.view.ui.fragment.GovermentFragment
 import com.example.bangkalapp.view.ui.fragment.LoadingFragment
+import com.example.bangkalapp.view.ui.fragment.MustLoginFragment
 import com.example.bangkalapp.view.ui.fragment.NewsFragment
 import com.example.bangkalapp.view.ui.fragment.PotentialFragment
 import com.example.bangkalapp.view.ui.fragment.ProfileFragment
@@ -49,7 +51,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.menuService -> {
-                        showFragment(ServiceFragment())
+                        if (MySharedPrefrence.getToken(this@MainActivity) != null) showFragment(ServiceFragment())
+                        else showFragment(MustLoginFragment())
                         return@setOnNavigationItemSelectedListener true
                     }
 

@@ -1,6 +1,6 @@
 package com.example.bangkalapp.data.network
 
-import android.media.session.MediaSession.Token
+import com.example.bangkalapp.data.local.Helper
 import com.example.bangkalapp.data.model.HttpModel
 import java.net.HttpURLConnection
 import java.net.URL
@@ -14,27 +14,34 @@ class HttpHandler {
         token: String? = null,
         rBody: String? = null
     ): HttpModel {
-        val url = URL(baseUrl + endpoint)
-        val conn = url.openConnection() as HttpURLConnection
-        conn.setRequestProperty("Content-Type", "application/json")
-        conn.requestMethod = method
+        var code: Int? = null
+        var body: String? = null
 
-        if (token != null) {
-            conn.setRequestProperty("Authorization", "Bearer ${token}")
-        }
+        try {
+            val url = URL(baseUrl + endpoint)
+            val conn = url.openConnection() as HttpURLConnection
+            conn.setRequestProperty("Content-Type", "application/json")
+            conn.requestMethod = method
 
-        if (rBody != null) {
-            conn.doOutput = true
-            conn.outputStream.use { it.write(rBody.toByteArray()) }
-        }
+            if (token != null) {
+                conn.setRequestProperty("Authorization", "Bearer ${token}")
+            }
 
-        val code = conn.responseCode
-        val body = try {
-            conn.inputStream.bufferedReader().use { it.readText() }
+            if (rBody != null) {
+                conn.doOutput = true
+                conn.outputStream.use { it.write(rBody.toByteArray()) }
+            }
+
+            code = conn.responseCode
+            body = try {
+                conn.inputStream.bufferedReader().use { it.readText() }
+            } catch (e: Exception) {
+                conn.errorStream.bufferedReader().use { it.readText() }
+            }
         } catch (e: Exception) {
-            conn.errorStream.bufferedReader().use { it.readText() }
+            Helper.log(e.message!!)
         }
 
-        return HttpModel(code, body)
+        return HttpModel(code!!, body!!)
     }
 }
