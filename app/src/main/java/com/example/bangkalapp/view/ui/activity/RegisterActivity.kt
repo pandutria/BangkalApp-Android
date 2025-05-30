@@ -13,6 +13,7 @@ import com.example.bangkalapp.data.network.HttpHandler
 import com.example.bangkalapp.databinding.ActivityRegisterBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class RegisterActivity : AppCompatActivity() {
@@ -25,7 +26,6 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.apply {
             tvLogin.setOnClickListener {
-                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                 finish()
             }
 
@@ -36,7 +36,6 @@ class RegisterActivity : AppCompatActivity() {
                     Helper.showErrorToast(this@RegisterActivity,"Semua input harus di isi")
                     return@setOnClickListener
                 }
-
                 register()
             }
         }
@@ -55,7 +54,15 @@ class RegisterActivity : AppCompatActivity() {
                 val response = HttpHandler().request("register", "POST", null, json.toString())
 
                 if (response.code in 200..300) {
-
+                    withContext(Dispatchers.Main) {
+                        Helper.showSuccessToast(this@RegisterActivity, "Daftar akun berhasil!!")
+                        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                        finish()
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Helper.showErrorToast(this@RegisterActivity, "Daftar akun gagal!!")
+                    }
                 }
             }
         } catch (e: Exception) {

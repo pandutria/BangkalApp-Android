@@ -5,10 +5,13 @@ import android.graphics.Color
 import android.util.Log
 import com.example.bangkalapp.R
 import io.github.muddz.styleabletoast.StyleableToast
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 object Helper {
+    var user = JSONObject()
+
     fun log(string: String) {
         Log.e("DataApi", "Error : $string")
     }
