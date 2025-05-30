@@ -20,7 +20,7 @@ object MySharedPrefrence {
     }
 
     fun deleteToken(context: Context) {
-        val shared = context.getSharedPreferences(token, Context.MODE_PRIVATE)
+        val shared = context.getSharedPreferences(sharedKey, Context.MODE_PRIVATE)
         with(shared.edit()) {
             remove(token)
             apply()

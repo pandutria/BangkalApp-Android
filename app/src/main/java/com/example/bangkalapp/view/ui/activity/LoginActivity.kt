@@ -2,6 +2,7 @@ package com.example.bangkalapp.view.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -46,6 +47,11 @@ class LoginActivity : AppCompatActivity() {
     fun login() {
         try {
             lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    binding.pb.visibility = View.VISIBLE
+                    binding.btn.visibility = View.GONE
+                }
+
                 val json = JSONObject().apply {
                     put("username", binding.etUsername.text.toString())
                     put("password", binding.etPassword.text.toString())
@@ -66,12 +72,18 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     }
                 } else {
-                    Helper.showErrorToast(this@LoginActivity, "Login Gagal!!")
+                    withContext(Dispatchers.Main) {
+                        Helper.showErrorToast(this@LoginActivity, "Login Gagal!!")
+                        binding.pb.visibility = View.GONE
+                        binding.btn.visibility = View.VISIBLE
+                    }
                 }
             }
         } catch (e: Exception) {
             Helper.log(e.message!!)
             Helper.showErrorToast(this@LoginActivity, "Eror : ${e.message}")
+            binding.pb.visibility = View.GONE
+            binding.btn.visibility = View.VISIBLE
         }
     }
 }

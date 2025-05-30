@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bangkalapp.R
+import com.example.bangkalapp.data.local.MySharedPrefrence
 import com.example.bangkalapp.databinding.ActivityOnBoardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {
@@ -15,10 +16,16 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        MySharedPrefrence.deleteToken(this)
+
         binding.apply {
             btn.setOnClickListener {
                 startActivity(Intent(this@OnBoardingActivity, MainActivity::class.java))
                 finish()
+            }
+
+            tvLogin.setOnClickListener {
+                startActivity(Intent(this@OnBoardingActivity, LoginActivity::class.java))
             }
         }
 

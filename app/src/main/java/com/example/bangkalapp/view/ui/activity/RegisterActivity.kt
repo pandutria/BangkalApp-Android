@@ -2,6 +2,7 @@ package com.example.bangkalapp.view.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -44,6 +45,11 @@ class RegisterActivity : AppCompatActivity() {
     fun register() {
         try {
             lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    binding.pb.visibility = View.VISIBLE
+                    binding.btn.visibility = View.GONE
+                }
+
                 val json = JSONObject().apply {
                     put("username", binding.etUsername.text.toString())
                     put("fullname", binding.etFullname.text.toString())
@@ -61,12 +67,17 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 } else {
                     withContext(Dispatchers.Main) {
-                        Helper.showErrorToast(this@RegisterActivity, "Daftar akun gagal!!")
+                        Helper.showErrorToast(this@RegisterActivity, "Daftar akun Gagal!!")
+                        binding.pb.visibility = View.GONE
+                        binding.btn.visibility = View.VISIBLE
                     }
                 }
             }
         } catch (e: Exception) {
             Helper.log(e.message!!)
+            Helper.showErrorToast(this@RegisterActivity, "Eror : ${e.message}")
+            binding.pb.visibility = View.GONE
+            binding.btn.visibility = View.VISIBLE
         }
     }
 }
