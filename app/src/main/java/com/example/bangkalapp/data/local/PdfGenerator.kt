@@ -1,11 +1,15 @@
 package com.example.bangkalapp.data.local
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.pdf.PdfDocument
+import android.net.Uri
 import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.FileProvider
 import com.example.bangkalapp.data.model.LetterRequest
 import com.example.bangkalapp.databinding.PdfLayoutBinding
 import java.io.File
@@ -27,9 +31,8 @@ class PdfGenerator(private val context: Context, private val letter: LetterReque
         binding.tvCitizenship.text = letter.citizenship ?: "-"
         binding.tvReligion.text = letter.religion ?: "-"
         binding.tvFatherName.text = letter.father_name ?: "-"
-        binding.tvMotherName.text = letter.mother_name ?: "-" // ini kamu isi pakai `nik`, seharusnya `mother_name`
+        binding.tvMotherName.text = letter.mother_name ?: "-"
         binding.tvLeterType.text = letter.letter_type?.name ?: "-"
-
 
         val displayMetrics = context.resources.displayMetrics
         val width = (595 * displayMetrics.density).toInt() // Convert points to pixels
@@ -51,7 +54,7 @@ class PdfGenerator(private val context: Context, private val letter: LetterReque
 
         document.finishPage(page)
 
-        // Simpan file ke penyimpanan internal
+        // Simpan file ke penyimpanan eksternal
         val fileName = "Surat_${System.currentTimeMillis()}.pdf"
         val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 
@@ -64,11 +67,20 @@ class PdfGenerator(private val context: Context, private val letter: LetterReque
             val outputStream = FileOutputStream(file)
             document.writeTo(outputStream)
             outputStream.close()
-            Toast.makeText(
-                context,
-                "PDF berhasil disimpan di ${file.absolutePath}",
-                Toast.LENGTH_LONG
-            ).show()
+
+            // Tampilkan dialog dengan opsi "Ok" dan "Buka File"
+            AlertDialog.Builder(context)
+                .setTitle("PDF Berhasil Disimpan")
+                .setMessage("File telah disimpan di ${file.absolutePath}")
+                .setPositiveButton("Ok") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Buka File") { _, _ ->
+                    openPdfFile(file)
+                }
+                .setCancelable(false)
+                .show()
+
         } catch (e: IOException) {
             e.printStackTrace()
             Toast.makeText(context, "Gagal menyimpan PDF: ${e.message}", Toast.LENGTH_LONG).show()
@@ -76,6 +88,24 @@ class PdfGenerator(private val context: Context, private val letter: LetterReque
 
         document.close()
     }
-}
 
-//
+    // Fungsi untuk membuka file PDF
+    private fun openPdfFile(file: File) {
+        try {
+            // Gunakan FileProvider untuk mendapatkan Uri
+            val uri = FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.fileprovider",
+                file
+            )
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/pdf")
+                addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
+            context.startActivity(Intent.createChooser(intent, "Buka PDF dengan"))
+        } catch (e: Exception) {
+            Toast.makeText(context, "Tidak ada aplikasi untuk membuka PDF: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+}

@@ -16,6 +16,7 @@ import com.example.bangkalapp.data.local.Helper
 import com.example.bangkalapp.data.local.MySharedPrefrence
 import com.example.bangkalapp.data.model.LetterRequest
 import com.example.bangkalapp.data.model.LetterType
+import com.example.bangkalapp.data.model.User
 import com.example.bangkalapp.data.network.HttpHandler
 import com.example.bangkalapp.databinding.ActivityMyLetterRequestBinding
 import com.example.bangkalapp.view.adapter.LetterRequestAdapter
@@ -96,15 +97,34 @@ class MyLetterRequestActivity : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()) {
                         val data = jsonArray.getJSONObject(i)
                         val letterType = data.getJSONObject("letter_type")
-                        list.add(LetterRequest(
-                            id  = data.getInt("id"),
-                            status = data.getString("status"),
-                            letter_type = LetterType(
-                                id = letterType.getInt("id"),
-                                name = letterType.getString("name"),
-                                description = letterType.getString("description")
+                        val user = data.getJSONObject("user")
+                        list.add(
+                            LetterRequest(
+                                id = data.getInt("id"),
+                                nik = data.getString("nik"),
+                                address = data.getString("address"),
+                                gender = data.getString("gender"),
+                                place_of_birth = data.getString("place_of_birth"),
+                                citizenship = data.getString("citizenship"),
+                                religion = data.getString("religion"),
+                                father_name = data.getString("father_name"),
+                                mother_name = data.getString("mother_name"),
+                                status = data.getString("status"),
+                                user = User(
+                                    id = user.getInt("id"),
+                                    role = user.getString("role"),
+                                    fullname = user.getString("fullname"),
+                                    username = user.getString("username")
+                                ),
+                                letter_type = LetterType(
+                                    id = letterType.getInt("id"),
+                                    name = letterType.getString("name"),
+                                    description = letterType.getString("description"),
+                                    image_url = letterType.getString("image_url"),
+                                )
                             )
-                        ))
+                        )
+
                     }
                 }
 
