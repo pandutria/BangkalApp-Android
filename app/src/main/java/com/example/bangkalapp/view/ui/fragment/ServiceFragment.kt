@@ -43,7 +43,8 @@ class ServiceFragment : Fragment() {
                 startActivity(Intent(requireContext(), MyLetterRequestActivity::class.java))
             }
 
-            me()
+//            me()
+            tvName.text = Helper.user.getString("fullname") + "!"
             showData()
         }
 

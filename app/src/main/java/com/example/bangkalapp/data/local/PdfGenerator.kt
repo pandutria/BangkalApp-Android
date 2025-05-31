@@ -19,10 +19,8 @@ import java.io.IOException
 class PdfGenerator(private val context: Context, private val letter: LetterRequest) {
 
     fun generatePdf() {
-        // Inflate the layout
         val binding = PdfLayoutBinding.inflate(LayoutInflater.from(context))
 
-        // Isi data ke layout
         binding.tvFullname.text = letter.user?.fullname ?: "-"
         binding.tvNik.text = letter.nik ?: "-"
         binding.tvAlamat.text = letter.address ?: "-"
@@ -35,26 +33,24 @@ class PdfGenerator(private val context: Context, private val letter: LetterReque
         binding.tvLeterType.text = letter.letter_type?.name ?: "-"
 
         val displayMetrics = context.resources.displayMetrics
-        val width = (595 * displayMetrics.density).toInt() // Convert points to pixels
-        val height = (842 * displayMetrics.density).toInt() // Convert points to pixels
+        val width = (595 * displayMetrics.density).toInt()
+        val height = (842 * displayMetrics.density).toInt()
 
         binding.root.measure(
             View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
             View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
         )
+
         binding.root.layout(0, 0, width, height)
 
-        // Buat dokumen PDF
         val document = PdfDocument()
         val pageInfo = PdfDocument.PageInfo.Builder(width, height, 1).create()
         val page = document.startPage(pageInfo)
 
-        // Gambar layout ke canvas
         binding.root.draw(page.canvas)
 
         document.finishPage(page)
 
-        // Simpan file ke penyimpanan eksternal
         val fileName = "Surat_${System.currentTimeMillis()}.pdf"
         val directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 
@@ -68,7 +64,6 @@ class PdfGenerator(private val context: Context, private val letter: LetterReque
             document.writeTo(outputStream)
             outputStream.close()
 
-            // Tampilkan dialog dengan opsi "Ok" dan "Buka File"
             AlertDialog.Builder(context)
                 .setTitle("PDF Berhasil Disimpan")
                 .setMessage("File telah disimpan di ${file.absolutePath}")
@@ -89,10 +84,8 @@ class PdfGenerator(private val context: Context, private val letter: LetterReque
         document.close()
     }
 
-    // Fungsi untuk membuka file PDF
     private fun openPdfFile(file: File) {
         try {
-            // Gunakan FileProvider untuk mendapatkan Uri
             val uri = FileProvider.getUriForFile(
                 context,
                 "${context.packageName}.fileprovider",
