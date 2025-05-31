@@ -6,7 +6,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 class HttpHandler {
-    val baseUrl = "http://192.168.13.69:8000/api/"
+    val baseUrl = "http://192.168.153.69:8000/api/"
 
     fun request(
         endpoint: String,

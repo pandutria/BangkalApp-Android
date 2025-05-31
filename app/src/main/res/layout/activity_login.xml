@@ -6,129 +6,144 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:gravity="center"
     android:background="@color/white"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/img_12"/>
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:text="Login Ke Akun Mu!"
-        android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/primary"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="20sp"/>
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:text="Silakan login untuk melanjutkan layanan digital Desa Bangkal dan untuk akses semua fitur yang tersedia."
-        android:textAlignment="center"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/lightGray"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="15sp"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        app:boxStrokeColor="@color/primary"
-        android:layout_marginTop="30dp"
-        app:hintTextColor="@color/primary"
-        android:layout_marginRight="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etUsername"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="Username"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:src="@drawable/img_12"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        app:boxStrokeColor="@color/primary"
-        android:layout_marginTop="10dp"
-        app:hintTextColor="@color/primary"
-        android:layout_marginRight="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:text="Login Ke Akun Mu!"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="20sp"/>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="Kata Sandi"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:text="Silakan login untuk melanjutkan layanan digital Desa Bangkal dan untuk akses semua fitur yang tersedia."
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/lightGray"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                app:boxStrokeColor="@color/primary"
+                android:layout_marginTop="30dp"
+                app:hintTextColor="@color/primary"
+                android:layout_marginRight="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Username"/>
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginTop="50dp"
-        android:gravity="center_horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                app:boxStrokeColor="@color/primary"
+                android:layout_marginTop="10dp"
+                app:hintTextColor="@color/primary"
+                android:layout_marginRight="20dp">
 
-        <ProgressBar
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:id="@+id/pb"
-            android:indeterminateTint="@color/primary"
-            android:visibility="gone"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Kata Sandi"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:backgroundTint="@color/primary"
-            android:text="Login"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="14sp"/>
 
-    </RelativeLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        android:gravity="center_horizontal">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/lightGray"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="15sp"
-            android:text="Belum punya akun?"/>
+                <ProgressBar
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:id="@+id/pb"
+                    android:indeterminateTint="@color/primary"
+                    android:visibility="gone"/>
 
-        <TextView
-            android:id="@+id/tvRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            android:textSize="15sp"
-            android:layout_marginLeft="5dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Daftar"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="@color/primary"
+                    android:text="Login"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="14sp"/>
 
-    </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/lightGray"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15sp"
+                    android:text="Belum punya akun?"/>
+
+                <TextView
+                    android:id="@+id/tvRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Daftar"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 

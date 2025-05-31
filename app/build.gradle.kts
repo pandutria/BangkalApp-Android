@@ -41,6 +41,10 @@ android {
 
 dependencies {
 //    implementation (libs.shimmer)
+//    implementation ("com.itextpdf:itextg:5.5.10")
+//    implementation(libs.dexter)
+//    implementation(libs.gson)
+//    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
     implementation(libs.styleabletoast)
     implementation (libs.circleimageview)
     implementation (libs.glide)
