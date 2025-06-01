@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 object Helper {
-    var user = JSONObject()
+    var user: JSONObject = JSONObject()
 
     fun log(string: String) {
         Log.e("DataApi", "Error : $string")

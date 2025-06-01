@@ -102,6 +102,7 @@
             android:text="Pandu Adyatama"
             android:fontFamily="@font/poppins_medium"
             android:textSize="15sp"
+            android:layout_marginLeft="30dp"
             android:textColor="@color/gray"/>
 
     </LinearLayout>
